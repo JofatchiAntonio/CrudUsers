@@ -59,6 +59,11 @@
             </a>
             @auth
                 <div class="d-flex align-items-center gap-3 ms-auto text-white">
+                    @if(auth()->user()->avatar)
+                        <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Foto de {{ auth()->user()->name }}" class="rounded-circle border border-light" width="42" height="42" style="object-fit: cover;">
+                    @else
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=0D6EFD&color=fff" alt="Foto de {{ auth()->user()->name }}" class="rounded-circle" width="42" height="42">
+                    @endif
                     <div class="text-end d-none d-sm-block">
                         <span class="d-block fw-semibold">{{ auth()->user()->name }}</span>
                         <small class="text-white-50">{{ auth()->user()->role?->name ?? 'User Normal' }}</small>

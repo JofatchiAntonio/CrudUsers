@@ -47,9 +47,10 @@ class UserController extends Controller
             $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 
-        User::create($data);
+        $user = User::create($data);
 
-        return redirect()->route('users.index')->with('success', 'Utilizador criado com sucesso!');
+        // Redireciona para a página de detalhes (show) do utilizador criado
+        return redirect()->route('users.show', $user->id)->with('success', 'Utilizador criado com sucesso!');
     }
 
     public function show(User $user)
